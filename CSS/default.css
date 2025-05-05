@@ -62,8 +62,7 @@ div#footer {
 div#content {
     border-style: none;
     padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden auto;
     flex: 1;
 }
 
