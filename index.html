@@ -3,8 +3,42 @@
     <head>
         <meta name="author" content="Jörgen Hägglund">
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="CSS/default.css">
         <title>Promoting Cobra</title>
+        <script>
+            // Safer parseInt()
+            function toInt(value) {
+                if (value === "") {
+                    return 0;
+                } else {
+                    return parseInt(value, 10);
+                }
+            }
+            // This function is called when the page is loaded
+            function init() {
+                const header = document.getElementById("header");
+                const footer = document.getElementById("footer");
+                const content = document.getElementById("content");
+
+                // Get computed styles for header and footer
+                const headerStyles = window.getComputedStyle(header);
+                const footerStyles = window.getComputedStyle(footer);
+
+                // Calculate margins using computed styles
+                const headerMarginTop = toInt(headerStyles.marginTop);
+                const headerMarginBottom = toInt(headerStyles.marginBottom);
+                const footerMarginTop = toInt(footerStyles.marginTop);
+                const footerMarginBottom = toInt(footerStyles.marginBottom);
+
+                // Set the top and bottom margins for the content
+                content.style.marginTop = header.offsetHeight + headerMarginTop + headerMarginBottom + "px";
+                content.style.marginBottom = footer.offsetHeight + footerMarginTop + footerMarginBottom + "px";
+            }
+
+            // Add an event listener to call the init function when the window loads
+            window.addEventListener("load", init);
+        </script>
     </head>
     <body>
         <div id="header">
@@ -22,17 +56,18 @@
                 <strong>Release date: </strong>May 13, 1988 (Sweden)<br><br>
                 <strong>Directed by: </strong>George P. Cosmatos<br>
             </div>
-            <hr>
-            <iframe 
-                width="853" 
-                height="480" 
-                src="https://www.youtube.com/embed/4TkYnMYNDrg" 
-                title="Cobra (1986) - Shootout Scene" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                allowfullscreen>
-            </iframe>
-            <hr>
+            <div>
+                <iframe 
+                    id="player"
+                    width="853" 
+                    height="480" 
+                    src="https://www.youtube.com/embed/4TkYnMYNDrg" 
+                    title="Cobra (1986) - Shootout Scene" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
             <div id="links">
                 <strong>Top billed cast:</strong><br>
                 <ul>
@@ -45,7 +80,6 @@
                 </ul>
             </div>
         </div>
-        <hr>
         <div id="footer">
             This page was created by Jörgen Hägglund in 2025, on assignment from <strong>FS</strong>
         </div>
